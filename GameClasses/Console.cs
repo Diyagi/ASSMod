@@ -1,32 +1,39 @@
-﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using HarmonyLib;
 using UnityEngine.UI;
 
-namespace ValheimDiyagi {
-
+namespace ValheimDiyagi
+{
+    /// <summary>
+    ///     Hooks some Private Methods from Console.
+    /// </summary>
     [HarmonyPatch(typeof(Console))]
-    public static class HookConsole {
+    public static class HookConsole
+    {
         [HarmonyReversePatch]
-        [HarmonyPatch(typeof(Console), "AddString", new Type[] { typeof(string)})]
-        public static void AddString(object instance, string text) => throw new NotImplementedException();
+        [HarmonyPatch(typeof(Console), "AddString", typeof(string))]
+        public static void AddString(object instance, string text)
+        {
+            throw new NotImplementedException();
+        }
     }
-    
-    [HarmonyPatch(typeof(Console), "InputText")]
-    public static class InputText {
-        private static bool Prefix(ref Console __instance, ref InputField ___m_input) {
-            string text = ___m_input.text;
-            if (text == "setmapdata") {
-                HookConsole.AddString(__instance, text);
 
-                ServerSideMinimap.SendMapData();
-                
-                return false;
-            }
-            return true;
+    /// <summary>
+    ///     Listens to command to Sync the Map Data to the callers client.
+    /// </summary>
+    [HarmonyPatch(typeof(Console), "InputText")]
+    public static class InputText
+    {
+        private static bool Prefix(ref Console __instance, ref InputField ___m_input)
+        {
+            var text = ___m_input.text;
+            if (text != "setmapdata") return true;
+            HookConsole.AddString(__instance, text);
+
+            ServerSideMinimap.SendMapData();
+
+            return false;
+
         }
     }
 }

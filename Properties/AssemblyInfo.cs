@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ValheimDiyagi")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Valheim Server Side Map")]
+[assembly: AssemblyDescription("Another Valheim Server Side Map Mod")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ValheimDiyagi")]
+[assembly: AssemblyProduct("DSSMap")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

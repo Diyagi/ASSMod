@@ -1,20 +1,19 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using System;
 
-namespace ValheimDiyagi {
-
-    [BepInPlugin("diyagi.ValheimMod", "Valheim Mod", version)]
-    public class ValheimDiyagi : BaseUnityPlugin {
-
+namespace ValheimDiyagi
+{
+    [BepInPlugin("diyagi.ServerSideMap", "DSSMap", version)]
+    public class ValheimDiyagi : BaseUnityPlugin
+    {
         public const string version = "0.0.1";
 
-        void Awake() {
-
-            Harmony harmony = new Harmony("diyagi.ValheimMod");
+        private void Awake()
+        {
+            var harmony = new Harmony("diyagi.ServerSideMap");
             harmony.PatchAll();
 
-            Logger.LogInfo("Valheim Diyagi Mod Loaded Successfully - Version(" + version + ")");
+            Logger.LogInfo("Server Side Map Loaded Successfully - Version(" + version + ")");
         }
     }
 }
